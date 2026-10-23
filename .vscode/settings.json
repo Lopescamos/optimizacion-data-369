@@ -1,0 +1,7 @@
+{
+    "conventionalCommits.scopes": [
+        "html",
+        "app",
+        "data"
+    ]
+}

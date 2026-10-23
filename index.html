@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olimpiadas 369 — Digitador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="sin-bloque">
+
+<header>
+  <span class="header-logo">369</span>
+  <h1>Olimpiadas 369 <span class="header-sub">/ Digitador de Resultados</span></h1>
+  <span class="badge-curso" id="badge-curso"></span>
+</header>
+
+<section id="seccion-bloque">
+  <div id="seccion-bloque-selector">
+    <p class="bloque-hint">Configura el bloque para comenzar</p>
+
+    <div class="field-group">
+      <label for="sel-curso">Curso</label>
+      <select id="sel-curso">
+        <option value="">Seleccionar</option>
+        <option value="mate">Matemática</option>
+        <option value="comu">Comunicación</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label for="sel-nivel">Nivel</label>
+      <select id="sel-nivel">
+        <option value="">Seleccionar nivel</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label for="sel-grado">Grado</label>
+      <select id="sel-grado">
+        <option value="">Seleccionar grado</option>
+      </select>
+    </div>
+
+    <button id="btn-fijar-bloque">Fijar bloque</button>
+  </div>
+
+  <div id="info-bloque-fijado" style="display:none;">
+    <span id="label-bloque-fijado"></span>
+    <button class="cambiar-bloque" id="btn-cambiar-bloque">Cambiar</button>
+  </div>
+</section>
+
+<main>
+
+  <aside id="panel-formulario">
+    <div class="panel-header">
+      <h3>Nuevo registro</h3>
+      <div id="indicador-modo"></div>
+    </div>
+
+    <div class="input-field">
+      <label for="input-nombre">Apellidos y Nombre</label>
+      <input
+        type="text"
+        id="input-nombre"
+        placeholder="Ej: QUISPE FLORES JUAN"
+        autocomplete="off"
+        spellcheck="false"
+      >
+    </div>
+
+    <div class="input-field">
+      <label for="input-colegio">Institución Educativa</label>
+      <div class="dropdown-wrap">
+        <input
+          type="text"
+          id="input-colegio"
+          placeholder="Buscar institución..."
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <div class="dropdown-list" id="drop-colegio"></div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="input-field">
+        <label for="input-correctas">Correctas</label>
+        <input
+          type="text"
+          inputmode="numeric"
+          id="input-correctas"
+          placeholder="0"
+          maxlength="2"
+          class="input-number"
+        >
+      </div>
+      <div class="input-field">
+        <label for="input-incorrectas">Incorrectas</label>
+        <input
+          type="text"
+          inputmode="numeric"
+          id="input-incorrectas"
+          placeholder="0"
+          maxlength="2"
+          class="input-number"
+        >
+      </div>
+    </div>
+
+    <div id="preview-puntaje">
+      <span class="preview-label">Puntaje calculado</span>
+      <span class="preview-valor" id="preview-valor">0</span>
+    </div>
+
+    <div class="form-actions">
+      <button id="btn-agregar">Agregar alumno</button>
+      <button id="btn-limpiar" class="btn-secondary">Limpiar</button>
+    </div>
+    <p class="shortcut-hint">Shift+Enter para agregar desde cualquier campo</p>
+
+  </aside>
+
+  <section id="panel-tabla">
+
+    <div id="toolbar-tabla">
+      <div class="toolbar-left">
+        <h3>Registros</h3>
+        <span class="contador-badge" id="contador-badge">0</span>
+      </div>
+      <div class="toolbar-right">
+        <button class="btn-marcar-completo" id="btn-marcar-completo">
+          Marcar grado completo
+        </button>
+        <button id="btn-exportar" disabled>
+          Exportar Excel
+        </button>
+      </div>
+    </div>
+
+    <div id="tabla-wrap">
+      <table id="tabla-registros">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Apellidos y Nombre</th>
+            <th>Institución Educativa</th>
+            <th>Correctas</th>
+            <th>Incorrectas</th>
+            <th>Puntaje</th>
+            <th>Hora / Orden</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody-registros">
+          <tr id="fila-vacia">
+            <td colspan="8">Configura el bloque e ingresa registros.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+</main>
+
+<div id="overlay-modal">
+  <div id="modal-box">
+    <h4>¿Marcar grado como completado?</h4>
+    <p>
+      Al confirmar, el sistema activará el <strong>Modo 2</strong> la próxima vez
+      que ingreses el mismo grado en el curso par. Las sugerencias pasarán a mostrar
+      el nombre completo del alumno.
+    </p>
+    <div class="modal-btns">
+      <button id="btn-modal-cancelar">Cancelar</button>
+      <button id="btn-modal-confirmar">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
